@@ -1,0 +1,23 @@
+<h1>School</h1>
+<form [formGroup]="schoolForm" (ngSubmit)="onSubmit()">
+  Name: <input type="text" formControlName="name">
+  <h3>Address</h3>
+  <ng-container formGroupName="address">
+    Street: <input type="text" formControlName="street">
+    ZIP: <input type="text" formControlName="zip">
+    City: <input type="text" formControlName="city">
+    Country: <input type="text" formControlName="country">
+  </ng-container>
+  <h3>Courses</h3>
+  <ng-container formArrayName="courses">
+    <div *ngFor = "let course of schoolForm.controls.courses.controls; let idx = index" [formGroupName]="idx">
+      Name: <input type="text" formControlName="name">
+      Description: <input type="text" formControlName="description">
+      <button type="button" (click)="deleteCourse(idx)">Delete course</button>
+    </div>
+  </ng-container>
+  <p>
+  <button type="button" (click)="addCourse()">Add course</button>
+  <p>
+  <button type="submit">Submit</button>
+</form>
